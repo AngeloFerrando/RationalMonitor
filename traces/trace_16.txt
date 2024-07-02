@@ -1,0 +1,17 @@
+z,b,a,c,h
+z,b,y,d,r
+q
+r,i,n,b
+x,m,h
+v,p,j,w,c
+q,y,j,a,e
+p,v,f,q,m
+h
+c,z
+i,d,k
+j,m
+r
+x,d,y,k
+r,v,t,z
+l
+y,e

@@ -1,0 +1,6 @@
+p,z
+f,m
+u,i,w
+o,v,u
+b,o
+r,n,h,s,c
