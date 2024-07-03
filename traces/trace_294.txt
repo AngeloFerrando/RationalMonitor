@@ -1,0 +1,10 @@
+n,f,v
+h,d,r
+l,i
+f,x,p,n
+l,h,j
+t,o
+e,x,s,k,u
+q,w
+m,t
+h,v,s

@@ -1,0 +1,5 @@
+i,u,o,e,d
+u,s,b,j
+n,v,d,w
+j,n,x,r
+z,x,c

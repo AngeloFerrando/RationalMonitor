@@ -32,19 +32,25 @@ def list_and_read_traces(folder_path):
 
 traces = list_and_read_traces('./traces/')
 results = {}
-for i in range(1, 2):
-    results[f'metric_{i}'] = {'True': 0, 'False': 0, 'Unknown': 0, 'Undefined': 0, 'Unknown (but it won\'t ever be False)': 0, 'Unknown (but it won\'t ever be True)': 0}
-    with open('props.txt', 'r') as file:
-        lines = file.readlines()
-        for line in lines:
-            line = line.split('$ ')
-            for trace in traces:
-                with open('tmp.txt', 'w') as file_t:
-                    file_t.write(trace)
-                try:
-                    verdict = rationalMonitor.main(['', line[0], line[1], line[2], line[3], line[4], 'tmp.txt', f'metric_{i}'])
-                    if verdict in results[f'metric_{i}']:
-                        results[f'metric_{i}'][verdict] += 1
-                except Exception:
-                    break
+with open('tmp-res.txt', 'w') as tmp_res:
+    for i in range(1, 2):
+        results[f'metric_{i}'] = {'True': 0, 'False': 0, 'Unknown': 0, 'Undefined': 0, 'Unknown (but it won\'t ever be False)': 0, 'Unknown (but it won\'t ever be True)': 0}
+        with open('props.txt', 'r') as file:
+            lines = file.readlines()
+            for line in lines:
+                line = line.split('$ ')
+                for trace in traces:
+                    with open('tmp.txt', 'w') as file_t:
+                        file_t.write(trace)
+                    try:
+                        verdict = rationalMonitor.main(['', line[0], line[1], line[2], line[3], line[4], 'tmp.txt', f'metric_{i}'])
+                        if verdict in results[f'metric_{i}']:
+                            results[f'metric_{i}'][verdict] += 1
+                    except Exception:
+                        break
+                tmp_res.write(str(results) + '\n')
 print(results)
+with open('res.txt', 'w') as file:
+    file.write('RESULTS:\n')
+    file.write(str(results))
+    file.write('\n')

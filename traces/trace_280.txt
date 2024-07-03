@@ -1,0 +1,11 @@
+b,h,z,j
+k,v,i,s,b
+l,w
+n,y,z,x,j
+m,x,y,o,l
+y,b,p,c,q
+u,p,n,h
+b
+i,e,j,v
+g
+g,l,d,c

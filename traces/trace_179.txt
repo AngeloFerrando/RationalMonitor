@@ -1,0 +1,13 @@
+i,a,g,y
+q,a,f
+f,d,z,k,t
+s
+n,x,q
+q
+r,k,q,t,w
+y,t,r,i,o
+q,o,t,y
+z,r
+o,s,k
+v,a
+h,l,d

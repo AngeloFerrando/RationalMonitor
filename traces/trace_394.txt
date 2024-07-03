@@ -1,0 +1,14 @@
+t,a
+k
+w,z
+m
+w,n,f
+c
+v,p,b
+i,x,y
+p
+u,l,a
+z,j
+l,g
+i,j,y
+c,p,l,v

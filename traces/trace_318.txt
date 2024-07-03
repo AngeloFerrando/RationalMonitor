@@ -1,0 +1,11 @@
+k,x,y
+i,d,r,a
+m,y,x
+n
+r
+p,l,f,j,u
+n,l
+f,k,z
+u,g
+b,k
+g

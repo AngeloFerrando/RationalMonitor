@@ -1,0 +1,7 @@
+x,i,o,h
+u,c,g,q
+f,e,a,b
+c,p,t,b,i
+n
+o,l,z
+s,u,t,b

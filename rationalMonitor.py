@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0,'/home/angelo/usr/lib/python3.10/site-packages/')
+# sys.path.insert(0,'/home/angelo/usr/lib/python3.10/site-packages/')
 import spot
 import time
 from enum import Enum
@@ -29,6 +29,114 @@ class Verdict(Enum):
             return 'Undefined'
 
 class RationalMonitor:
+    def __init__(self, ltl, ap, sim, costs, resource_bound, time_window):
+        self.__ap = ap
+        self.__sim = sim
+        self.__costs = costs
+        self.__resource_bound = resource_bound
+        self.__time_window = time_window
+        self.__ltl = self.split(spot.translate(ltl))
+        self.__count = 0
+    def revise_and_evaluate(self):
+        payoffs = get_payoffs(spot.formula(str(self.__ltl)), self.__sim)
+        print(f'Payoffs: {payoffs}')
+        sim_to_break = knapsack(payoffs, self.__costs, self.__resource_bound)
+        print(f'broken sim: {sim_to_break}')
+        self.__sim = [s for s in self.__sim if s not in sim_to_break]
+    def next(self, ev):
+        if self.__count % self.__time_window == 0:
+            self.revise_and_evaluate()
+        self.__count += 1
+        return self.__ltl.next(ev)
+    def split(self, ltl):
+        if ltl._is(spot.op_And): # conjunction
+            sub_ltls = []
+            for sub_ltl in ltl:
+                sub_ltls.append(self.split(sub_ltl))
+            return AndCompositionalMonitor(sub_ltls)
+        elif ltl._is(spot.op_Or): # conjunction
+            sub_ltls = []
+            for sub_ltl in ltl:
+                sub_ltls.append(self.split(sub_ltl))
+            return OrCompositionalMonitor(sub_ltls)
+        elif ltl._is(spot.op_Not): # negation
+            for sub_ltl in ltl:
+                return NotCompositionalMonitor(sub_ltl)
+        else:
+            return TemporalMonitor(ltl, self.__ap, self.__sim) #, self.__costs, self.__resource_bound) this are evalauted in the composition one
+            
+class AndCompositionalMonitor():
+    def __init__(self, sub_ltls):
+        self.__sub_ltls = sub_ltls
+    def next(self, ev):
+        verdicts = []
+        # new_sub_ltls = []
+        for sub_ltl in self.__sub_ltls:
+            verdict = sub_ltl.next(ev)
+            verdicts.append(verdict)
+            # if verdict != Verdict.tt:
+            #     new_sub_ltls.append(sub_ltl)
+        # self.__sub_ltls = new_sub_ltls
+        if Verdict.ff in verdicts:
+            return Verdict.ff
+        elif Verdict.undefined in verdicts:
+            return Verdict.undefined
+        elif Verdict.nf in verdicts and Verdict.nt not in verdicts and Verdict.unknown not in verdicts:
+            return Verdict.nf
+        elif Verdict.nt in verdicts and Verdict.nf not in verdicts:
+            return Verdict.nt
+        elif Verdict.nf in verdicts and Verdict.nt in verdicts:
+            return Verdict.nt
+        elif Verdict.unknown in verdicts:
+            return Verdict.unknown
+        else:
+            return Verdict.tt
+class OrCompositionalMonitor():
+    def __init__(self, sub_ltls):
+        self.__sub_ltls = sub_ltls
+    def next(self, ev):
+        verdicts = []
+        # new_sub_ltls = []
+        for sub_ltl in self.__sub_ltls:
+            verdict = sub_ltl.next(ev)
+            verdicts.append(verdict)
+            # if verdict != Verdict.ff:
+            #     new_sub_ltls.append(sub_ltl)
+        # self.__sub_ltls = new_sub_ltls
+        if Verdict.tt in verdicts:
+            return Verdict.tt
+        elif Verdict.nf in verdicts and Verdict.nt not in verdicts:
+            return Verdict.nf
+        elif Verdict.nt in verdicts and Verdict.nf not in verdicts and Verdict.unknown not in verdicts:
+            return Verdict.nt
+        elif Verdict.nf in verdicts and Verdict.nt in verdicts and Verdict.unknown not in verdicts:
+            return Verdict.nf
+        elif Verdict.unknown in verdicts:
+            return Verdict.unknown
+        elif Verdict.undefined in verdicts:
+            return Verdict.undefined
+        else:
+            return Verdict.ff
+        
+class NotCompositionalMonitor():
+    def __init__(self, sub_ltl):
+        self.__sub_ltl = sub_ltl
+    def next(self, ev):
+        verdict = self.__sub_ltl.next(ev)
+        if Verdict.tt == verdict:
+            return Verdict.ff
+        elif Verdict.ff == verdict:
+            return Verdict.tt
+        elif Verdict.nt == verdict:
+            return Verdict.nf
+        elif Verdict.nf == verdict:
+            return Verdict.nt
+        elif Verdict.unknown == verdict:
+            return Verdict.unknown
+        else:
+            return Verdict.undefined
+        
+class TemporalMonitor:
     def __init__(self, ltl, ap, sim, costs, resource_bound):
         eLTL = explicit_ltl(spot.formula(ltl).negative_normal_form().to_str(), ap)
         print('Explicit LTL: ', eLTL)
@@ -42,12 +150,7 @@ class RationalMonitor:
         self.__nInit, self.__nFin = self.setup(self.__nAut)
         self.__uInit, self.__uFin = self.setup(self.__uAut)
         self.__ap = ap
-        payoffs = get_payoffs(spot.formula(ltl), sim)
-        print(f'Payoffs: {payoffs}')
-        sim_to_break = knapsack(payoffs, costs, resource_bound)
-        print(f'broken sim: {sim_to_break}')
-        self.__sim = [s for s in sim if s not in sim_to_break]
-        # self.__sim = sim
+        self.__sim = sim
     def setup(self, aut):
         fin = set()
         states = set()
@@ -209,7 +312,7 @@ def knapsack(payoffs, costs, resource_bound):
     
     return [atom.replace('[', '').replace(']', '').replace('\'', '').split(',') for atom in selected_atoms]
 
-@timeout(5)
+@timeout(3)
 def main(args):
     global metric
     ltl = args[1]

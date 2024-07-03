@@ -1,12 +1,12 @@
 import sys
-sys.path.insert(0,'/home/angelo/usr/lib/python3.10/site-packages/')
+# sys.path.insert(0,'/home/angelo/usr/lib/python3.10/site-packages/')
 import spot
 
 def metric(phi, atom):
     i_phi = iter(phi)
     if phi._is(spot.op_X): # next
         sub_phi = next(i_phi)
-        return 0.5 * metric(sub_phi, atom)
+        return 1.0 * metric(sub_phi, atom)
     elif phi._is(spot.op_U): # until
         sub_phi_1 = next(i_phi)
         sub_phi_2 = next(i_phi)
@@ -33,7 +33,7 @@ def metric(phi, atom):
         sub_phi = next(i_phi)
         return metric(sub_phi, atom)
     else: # atomic proposition
-        return 1 if phi.to_str() == atom else 0.0
+        return 1.0 if phi.to_str() == atom else 0.0
 
 # # print(dir(spot))
 # phi = spot.formula('(Xp && q) || a || b')

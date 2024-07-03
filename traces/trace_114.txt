@@ -1,0 +1,14 @@
+u,f,z,s
+s,z,q,o,m
+r,m,n,o
+s,n,y,t,z
+k,e,d,y
+b,u,v,w
+a,h,z
+a,z
+b,u,p
+o
+i,s,a,w
+v,d
+o,x
+j,n,z

@@ -1,0 +1,15 @@
+x
+s,a,w,h
+v,n,x,y,q
+b,d,c,j,p
+p,a
+t,k,g
+j,g,l,m,o
+o,h,m,e,d
+a
+q,r,v,w
+i,k,b,e
+m,x
+w,q,y,f,n
+n
+d,x,i,c

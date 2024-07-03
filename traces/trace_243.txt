@@ -1,0 +1,12 @@
+n,f,t,r
+n
+a,s,b
+i,k
+x,b,q
+q,s
+l,x,d,s,e
+k,y
+o,w,r,y
+n,e
+u,y,n,l
+e,n

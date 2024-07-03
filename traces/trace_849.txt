@@ -1,0 +1,16 @@
+t,y,k,d
+m,h,o
+k,m
+n,q,p
+w,u,s,f
+p,q
+b,d,w,c
+o,c,e,y,r
+h,o,z,c,p
+q,h
+s,c,o
+z,y,k
+e
+p,x,v
+s
+g,v,z,h,b

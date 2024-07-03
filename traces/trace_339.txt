@@ -1,0 +1,9 @@
+x,t
+i,j,f,c,o
+f,e
+k
+z,y
+b,m,x,n,v
+l,j
+d,l,p,n,e
+q

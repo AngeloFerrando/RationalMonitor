@@ -1,0 +1,4 @@
+d,h,i,m
+a,p,n
+y
+y,g,d

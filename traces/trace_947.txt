@@ -1,0 +1,10 @@
+a,g
+o,z,r,v,g
+u,s,d
+c,w,a,k
+x
+u,l,q
+t
+c,e,p
+b,c
+s,d

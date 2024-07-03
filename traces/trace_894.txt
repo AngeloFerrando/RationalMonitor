@@ -1,0 +1,7 @@
+q
+f,v,t
+p,z,n,k
+v,i,d,g
+j,h,b,q,f
+y,t,b
+b,y,d

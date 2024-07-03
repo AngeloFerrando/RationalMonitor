@@ -1,0 +1,14 @@
+c,j,b
+m,q,t,r,a
+a,i,y,k,w
+q,a,z,p,h
+p,s
+a,c,b
+q,a,y
+p,j,m,k
+d,k,c
+i,n,p,t,w
+j,d,x
+f,d,a,h
+s,m,k,e
+u,d,y

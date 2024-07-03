@@ -1,6 +1,6 @@
 import sys
 import string
-sys.path.insert(0,'/home/angelo/usr/lib/python3.10/site-packages/')
+# sys.path.insert(0,'/home/angelo/usr/lib/python3.10/site-packages/')
 import spot
 import random
 
@@ -56,9 +56,9 @@ def main(args):
             file.write(atoms + '$ ')
             sim = [s for s in random_split(atoms, 3) if len(s)>1]
             file.write(str(sim)[1:-1].replace('\'', '') + '$ ')
-            costs = ';'.join([str(s).replace('\'', '') + ':' + str(random.uniform(0, 50)) for s in sim])
+            costs = ';'.join([str(s).replace('\'', '') + ':' + str(random.uniform(0, 30)) for s in sim])
             file.write(costs + '$ ')
-            file.write(str(random.uniform(0,100)))
+            file.write(str(random.uniform(0,50)))
             file.write('\n')
             count += 1
 

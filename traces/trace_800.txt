@@ -1,0 +1,12 @@
+v,r,q,d
+r,d,s,y
+x,v,g
+x,m,l,i,z
+o,a
+x,w,l,e,b
+a,e,i,x
+q
+u,y,l,q,g
+u,s,w
+a
+y,g,z

@@ -1,0 +1,4 @@
+n,h,w,q
+s,v,a
+g,u,s,q,i
+q

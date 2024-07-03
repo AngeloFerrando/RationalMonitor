@@ -1,0 +1,7 @@
+p,i
+d,h,a
+t,k,p,r
+v,c
+y,j,h,r
+e,w,s,g
+c,x,l
