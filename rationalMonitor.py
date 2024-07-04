@@ -32,22 +32,23 @@ class RationalMonitor:
     def __init__(self, ltl, ap, sim, costs, resource_bound, time_window):
         self.__ap = ap
         self.__sim = sim
+        self.__sim_backup = sim
         self.__costs = costs
         self.__resource_bound = resource_bound
         self.__time_window = time_window
-        self.__ltl = self.split(spot.translate(ltl))
+        self.__ltl = self.split(spot.formula(ltl))
         self.__count = 0
     def revise_and_evaluate(self):
-        payoffs = get_payoffs(spot.formula(str(self.__ltl)), self.__sim)
+        payoffs = get_payoffs(spot.formula(str(self.__ltl)), self.__sim_backup)
         print(f'Payoffs: {payoffs}')
         sim_to_break = knapsack(payoffs, self.__costs, self.__resource_bound)
         print(f'broken sim: {sim_to_break}')
-        self.__sim = [s for s in self.__sim if s not in sim_to_break]
+        self.__sim = [s for s in self.__sim_backup if s not in sim_to_break]
     def next(self, ev):
         if self.__count % self.__time_window == 0:
             self.revise_and_evaluate()
         self.__count += 1
-        return self.__ltl.next(ev)
+        return self.__ltl.next(ev, self.__sim)
     def split(self, ltl):
         if ltl._is(spot.op_And): # conjunction
             sub_ltls = []
@@ -63,20 +64,30 @@ class RationalMonitor:
             for sub_ltl in ltl:
                 return NotCompositionalMonitor(sub_ltl)
         else:
-            return TemporalMonitor(ltl, self.__ap, self.__sim) #, self.__costs, self.__resource_bound) this are evalauted in the composition one
+            return TemporalMonitor(str(ltl), self.__ap) #, self.__costs, self.__resource_bound) this are evalauted in the composition one
             
 class AndCompositionalMonitor():
     def __init__(self, sub_ltls):
         self.__sub_ltls = sub_ltls
-    def next(self, ev):
-        verdicts = []
-        # new_sub_ltls = []
+    def __str__(self):
+        l = []
         for sub_ltl in self.__sub_ltls:
-            verdict = sub_ltl.next(ev)
+            l.append(str(sub_ltl))
+        return '&&'.join(l)
+    def next(self, ev, sim):
+        verdicts = []
+        new_sub_ltls = []
+        for sub_ltl in self.__sub_ltls:
+            if sub_ltl not in [Verdict.tt, Verdict.ff, Verdict.undefined]:
+                verdict = sub_ltl.next(ev, sim)
+            else:
+                verdict = sub_ltl
             verdicts.append(verdict)
-            # if verdict != Verdict.tt:
-            #     new_sub_ltls.append(sub_ltl)
-        # self.__sub_ltls = new_sub_ltls
+            if verdict in [Verdict.tt, Verdict.ff, Verdict.undefined]:
+                new_sub_ltls.append(verdict)
+            else:
+                new_sub_ltls.append(sub_ltl)
+        self.__sub_ltls = new_sub_ltls
         if Verdict.ff in verdicts:
             return Verdict.ff
         elif Verdict.undefined in verdicts:
@@ -94,15 +105,25 @@ class AndCompositionalMonitor():
 class OrCompositionalMonitor():
     def __init__(self, sub_ltls):
         self.__sub_ltls = sub_ltls
-    def next(self, ev):
-        verdicts = []
-        # new_sub_ltls = []
+    def __str__(self):
+        l = []
         for sub_ltl in self.__sub_ltls:
-            verdict = sub_ltl.next(ev)
+            l.append(str(sub_ltl))
+        return '||'.join(l)
+    def next(self, ev, sim):
+        verdicts = []
+        new_sub_ltls = []
+        for sub_ltl in self.__sub_ltls:
+            if sub_ltl not in [Verdict.tt, Verdict.ff, Verdict.undefined]:
+                verdict = sub_ltl.next(ev, sim)
+            else:
+                verdict = sub_ltl
             verdicts.append(verdict)
-            # if verdict != Verdict.ff:
-            #     new_sub_ltls.append(sub_ltl)
-        # self.__sub_ltls = new_sub_ltls
+            if verdict in [Verdict.tt, Verdict.ff, Verdict.undefined]:
+                new_sub_ltls.append(verdict)
+            else:
+                new_sub_ltls.append(sub_ltl)
+        self.__sub_ltls = new_sub_ltls
         if Verdict.tt in verdicts:
             return Verdict.tt
         elif Verdict.nf in verdicts and Verdict.nt not in verdicts:
@@ -121,8 +142,15 @@ class OrCompositionalMonitor():
 class NotCompositionalMonitor():
     def __init__(self, sub_ltl):
         self.__sub_ltl = sub_ltl
-    def next(self, ev):
-        verdict = self.__sub_ltl.next(ev)
+    def __str__(self):
+        return f'!({str(self.__sub_ltl)})'
+    def next(self, ev, sim):
+        if self.__sub_ltl not in [Verdict.tt, Verdict.ff, Verdict.undefined]:
+            verdict = self.__sub_ltl.next(ev, sim)
+        else:
+            verdict = self.__sub_ltl
+        if verdict in [Verdict.tt, Verdict.ff, Verdict.undefined]:
+            self.__sub_ltl = verdict
         if Verdict.tt == verdict:
             return Verdict.ff
         elif Verdict.ff == verdict:
@@ -137,7 +165,7 @@ class NotCompositionalMonitor():
             return Verdict.undefined
         
 class TemporalMonitor:
-    def __init__(self, ltl, ap, sim, costs, resource_bound):
+    def __init__(self, ltl, ap):
         eLTL = explicit_ltl(spot.formula(ltl).negative_normal_form().to_str(), ap)
         print('Explicit LTL: ', eLTL)
         enLTL = explicit_ltl(spot.formula('!(' + ltl + ')').negative_normal_form().to_str(), ap)
@@ -150,7 +178,9 @@ class TemporalMonitor:
         self.__nInit, self.__nFin = self.setup(self.__nAut)
         self.__uInit, self.__uFin = self.setup(self.__uAut)
         self.__ap = ap
-        self.__sim = sim
+        self.__ltl = ltl
+    def __str__(self):
+        return self.__ltl
     def setup(self, aut):
         fin = set()
         states = set()
@@ -172,13 +202,13 @@ class TemporalMonitor:
         initSet = set()
         initSet.add(init)
         return initSet, fin
-    def next(self, ev):
+    def next(self, ev, sim):
         print(ev)
         event = buddy.bddtrue
         for ap in self.__ap:
             if ap.startswith('!'): continue
             ind = []
-            for s in self.__sim:
+            for s in sim:
                 if ap in s:
                     ind = s
                     break
@@ -312,7 +342,7 @@ def knapsack(payoffs, costs, resource_bound):
     
     return [atom.replace('[', '').replace(']', '').replace('\'', '').split(',') for atom in selected_atoms]
 
-@timeout(3)
+# @timeout(3)
 def main(args):
     global metric
     ltl = args[1]
@@ -329,15 +359,16 @@ def main(args):
     for c in args[4].split(';'):
         costs[c.split(':')[0].replace(' ', '')] = float(c.split(':')[1])
     resource_bound = float(args[5])
-    filename = args[6]
-    metric = importlib.import_module(args[7])
+    time_window = int(args[6])
+    filename = args[7]
+    metric = importlib.import_module(args[8])
     print('ltl ' + str(ltl))
     print('ap ' + str(ap))
     print('sim ' + str(sim))
     print('costs ' + str(costs))
     print('resource bound ' + str(resource_bound))
     print(filename)
-    monitor = RationalMonitor(ltl, ap, sim, costs, resource_bound)
+    monitor = RationalMonitor(ltl, ap, sim, costs, resource_bound, time_window)
     verdict = None
     with open(filename, 'r') as file:
         while True:
@@ -348,7 +379,7 @@ def main(args):
     print('Verdict: ' + str(verdict))
     return str(verdict)
 
-if __name__ == '__main__':
-    main(sys.argv)
+# if __name__ == '__main__':
+#     main(sys.argv)
 
-# main(["", "X a", "[a,b,c]", "[a,b]", "[a,b]:10", "10", "test.txt"])
+main(["", "G!(x && Xi) || F(Xg || (Fj U o))", "[a,b,c,d]", "[a,b];[c,d]", "[a,b]:10;[c,d]:10", "10", "1", "test.txt", "metric_1"])
