@@ -1,11 +1,7 @@
-f,c
+s
+q,p,t,y,r
 t
-e
-c,r
-n,v,f,h,d
-f,v,u
-j
-e,c
-q,e,m
-x,a,w,s,b
-k,o
+p,c,v
+x,t
+k,y,m,c
+o

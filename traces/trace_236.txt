@@ -1,5 +1,7 @@
-n
-t,e
-v,k,m,a,j
-c,e,s,d
-o,g,l
+f,i
+c,n,k,a,o
+h
+s
+k
+d,u,a
+t,k

@@ -1,4 +1,1 @@
-m,b,g
-k
-y
-g,s
+h,x,k,y

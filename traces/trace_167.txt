@@ -1,14 +1,2 @@
-d
-d,i,b,u,a
-f,h,y
-z,j,m
-v,h,j,o,u
-v,g,c,z
-m,w
-x,e
-q
-k,r,x,j,q
-v,i
-q,t
-c,d,f,i
-v,y,q,o,c
+x,a,d
+g,f,d

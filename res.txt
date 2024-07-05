@@ -1,2 +1,1 @@
-RESULTS:
-{'metric_1': {'True': 0, 'False': 19, 'Unknown': 15, 'Undefined': 0, "Unknown (but it won't ever be False)": 6, "Unknown (but it won't ever be True)": 0}}
+metric_0{'True': 17043, 'False': 41035, 'Unknown': 68767, 'Undefined': 3540, "Unknown (but it won't ever be False)": 0, "Unknown (but it won't ever be True)": 0}

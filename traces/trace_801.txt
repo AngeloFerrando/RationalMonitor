@@ -1,1 +1,3 @@
-o
+x,o,s,c,b
+y
+j,u,x,a,d

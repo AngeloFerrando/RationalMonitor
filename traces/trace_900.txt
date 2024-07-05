@@ -1,8 +1,4 @@
-n,c,r
-n,t
-e,l,n
-a
-d
-b,g,h,f
-c,d,u
-a,u,s,n,g
+b,n,z,o,d
+f,o,u,z
+m
+c,a,y

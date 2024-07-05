@@ -1,7 +1,4 @@
-j,y,q,e
-q,z,d,g,k
-e,r,b,d
-n,d,w
-n
-y,d,g
-c
+t,k,a
+o,f
+x,r,i,y,o
+q,y,b,i

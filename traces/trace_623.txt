@@ -1,3 +1,4 @@
-d,t
-y,b
-d
+r
+s,h
+k,p
+n

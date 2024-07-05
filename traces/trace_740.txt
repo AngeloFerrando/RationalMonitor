@@ -1,3 +1,5 @@
-y,q,c,x,o
-t
-n,r
+l,d,n
+x
+p
+q,x
+v

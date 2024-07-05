@@ -1,5 +1,2 @@
-k
-m
-t,i,z
-m,y,s,r,h
-l
+l,y,a
+z,y,o,f

@@ -1,6 +1,6 @@
-g,p,h
-p,h,e,x
-h,t,l,m
-f,q,h
-d
-f
+c,f,b,k,p
+w
+t,s
+i,w,y,d
+p,a,x,e
+c,n,p,t

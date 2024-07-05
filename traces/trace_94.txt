@@ -1,8 +1,10 @@
-m,h,q
-v,x
-w,y
-x,l,h,s,k
-c,r,m
-v,a,r,d
-z,i,n,b,p
+i,r
+z,h,l
 y
+v,x,b
+d,j
+a,t,k,r
+z,s,x,j
+t,r
+j,c,y,m,d
+s,b,e,v

@@ -1,2 +1,1 @@
-x,r,s
-n,k,o
+e,m,h,r,x

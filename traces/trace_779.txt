@@ -1,2 +1,6 @@
-j,c,k,b,f
-v,c,h,l,o
+i
+o,f,a,k
+v,a,b,t
+f,i,n,l,h
+o,b,y
+z,o,e,v,t

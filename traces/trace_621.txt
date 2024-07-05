@@ -1,9 +1,4 @@
-h,i,r
-f,v
-m,w,t
-z,g,u,w
-o
-x,l,s,c,m
-c
-z,u
-l,x,s
+q,t
+w,i,a,p
+r,z,x,w
+y,w,e,b,r

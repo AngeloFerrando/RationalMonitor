@@ -1,3 +1,9 @@
-x
-d,o
-b,c
+i,l,x
+b
+f
+p,o
+t,c,x,i,g
+j,s,d
+n
+o,a,q,x
+y,q,a

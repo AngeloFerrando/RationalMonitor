@@ -1,5 +1,4 @@
-s,d,h
-m,r
-y
-f
-a,r,s,q
+x,r
+m,p
+w
+s

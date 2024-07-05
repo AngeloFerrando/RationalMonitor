@@ -1,7 +1,5 @@
-e,k,p,v
-u,d
-v
-w,j,i,x,c
-r,n,h,y,d
-q,d
-i
+g,e,f
+j,k,r,w,c
+g,w
+j,h
+a,m,z

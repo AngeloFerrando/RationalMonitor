@@ -1,3 +1,6 @@
-w,o,x,i,b
-d
-l,q,b
+c,r,k,l
+s
+y
+c,l,b,y
+s,n
+k,m

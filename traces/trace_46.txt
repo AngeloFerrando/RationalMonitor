@@ -1,2 +1,2 @@
-r,c,u,t,d
-r,l,c,m
+c,n,x
+n,p,a

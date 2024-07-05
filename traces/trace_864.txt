@@ -1,2 +1,1 @@
-f,r,b
-o,m,b
+q,t,n,b,y

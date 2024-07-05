@@ -1,4 +1,2 @@
-d,h,i,m
-a,p,n
-y
-y,g,d
+b
+z,d,i,o,g

@@ -1,10 +1,7 @@
-b,y,o,u
-o,u,g
-v,k,t
 p,q
-w,d,h,a,n
-b,u,w,r
-y,s,h,d
-n,h
-h,p,s
-l,i,r
+i,q
+n
+v,s,t,l
+f,t
+y,m
+l,p,v,b,s

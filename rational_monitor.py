@@ -5,7 +5,7 @@ import time
 from enum import Enum
 import buddy
 import importlib
-from timeout_decorator import timeout
+# from timeout_decorator import timeout
 
 class Verdict(Enum):
     ff = 0
@@ -62,7 +62,7 @@ class RationalMonitor:
             return OrCompositionalMonitor(sub_ltls)
         elif ltl._is(spot.op_Not): # negation
             for sub_ltl in ltl:
-                return NotCompositionalMonitor(sub_ltl)
+                return NotCompositionalMonitor(self.split(sub_ltl))
         else:
             return TemporalMonitor(str(ltl), self.__ap) #, self.__costs, self.__resource_bound) this are evalauted in the composition one
             
@@ -361,7 +361,9 @@ def main(args):
     resource_bound = float(args[5])
     time_window = int(args[6])
     filename = args[7]
+    # importlib.invalidate_caches()
     metric = importlib.import_module(args[8])
+    print(metric)
     print('ltl ' + str(ltl))
     print('ap ' + str(ap))
     print('sim ' + str(sim))
@@ -379,7 +381,7 @@ def main(args):
     print('Verdict: ' + str(verdict))
     return str(verdict)
 
-# if __name__ == '__main__':
-#     main(sys.argv)
+if __name__ == '__main__':
+    main(sys.argv)
 
-main(["", "G!(x && Xi) || F(Xg || (Fj U o))", "[a,b,c,d]", "[a,b];[c,d]", "[a,b]:10;[c,d]:10", "10", "1", "test.txt", "metric_1"])
+# main(["", "!G!(x && Xi) || F(Xg || (Fj U o))", "[a,b,c,d]", "[a,b];[c,d]", "[a,b]:10;[c,d]:10", "10", "1", "test.txt", "metric_1"])

@@ -1,10 +1,1 @@
-c,s,h,i,o
-e
-a,f,p,j,w
-q,h,y
-q,w,l,o
-y,s,q,u
-l,i,k
-q,k,l,u,g
-e,t,r
-r
+p

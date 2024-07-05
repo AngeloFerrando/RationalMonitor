@@ -1,4 +1,2 @@
-j,w,t,g,s
-w,l
-a,v,h
-i,a,k
+f,e,l,r
+c,o,f,t,q

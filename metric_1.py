@@ -6,7 +6,7 @@ def metric(phi, atom):
     i_phi = iter(phi)
     if phi._is(spot.op_X): # next
         sub_phi = next(i_phi)
-        return 1.0 * metric(sub_phi, atom)
+        return 0.5 * metric(sub_phi, atom)
     elif phi._is(spot.op_U): # until
         sub_phi_1 = next(i_phi)
         sub_phi_2 = next(i_phi)
@@ -16,7 +16,7 @@ def metric(phi, atom):
         return 0.3 * metric(sub_phi, atom)
     elif phi._is(spot.op_G): # globally
         sub_phi = next(i_phi)
-        return 0.7 * metric(sub_phi, atom)
+        return 0.5 * metric(sub_phi, atom)
     elif phi._is(spot.op_And): # conjunction
         my_metric = 0.0
         for sub_phi in phi:
@@ -34,13 +34,3 @@ def metric(phi, atom):
         return metric(sub_phi, atom)
     else: # atomic proposition
         return 1.0 if phi.to_str() == atom else 0.0
-
-# # print(dir(spot))
-# phi = spot.formula('(Xp && q) || a || b')
-# # print(dir(phi))
-# payoffs = get_payoffs(phi, [['p', 'q'], ['a', 'b']])
-# print(payoffs)
-# costs = {'[\'p\', \'q\']': 20, '[\'a\', \'b\']': 10}
-# resource_bound = 25
-# optimal_atoms = knapsack(payoffs, costs, resource_bound)
-# print(f'Optimal atoms according to metric: {optimal_atoms}')

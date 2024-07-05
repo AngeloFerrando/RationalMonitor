@@ -1,6 +1,8 @@
-l,r,k
-y,m,h,t,c
-c,x
-e,x,m,o
-s,x,h
-h,d
+f,h,v,i
+s,o
+e,g
+p,a,q,f
+t,b,s
+h,j,m,g,d
+q,s
+g

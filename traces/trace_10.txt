@@ -1,8 +1,4 @@
-n,x,t
-p,o,m
-d,l,y
-k,r,w,l,p
-t,v,w,m,g
-b,j,c,a
-b,c
-s,c,y,w
+x,v
+p,l,b,x,o
+u,d,a
+r

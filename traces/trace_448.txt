@@ -1,11 +1,3 @@
-v,g,j,s,l
-s,b,t
-h,e
-j,h
-f,w,e
-p,w,x
-d,z,q
-t,v,h,l,f
-l,c
-z,d
-n,f,u,y,m
+s,z,y,b
+j,o,c,n
+g,s

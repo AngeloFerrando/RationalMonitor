@@ -1,7 +1,1 @@
-o
-r,c,x,q
-a
-f,g
-f,k,d,j
-s
-o
+c,g

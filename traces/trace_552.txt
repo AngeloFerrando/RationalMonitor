@@ -1,14 +1,3 @@
-q,p
-j
-r,l,m,c
-m,z
-n,m
-p,f
-x
-r,n,c
-y,m,j
-j,c,k
-y
-h,q
-w,r,x,v
-n
+h,p,v,i,a
+v
+d,f
