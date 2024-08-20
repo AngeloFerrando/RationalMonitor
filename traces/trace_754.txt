@@ -1,7 +1,0 @@
-b,q,y,c,j
-d,v
-e,k,i,s,t
-v,n,z,j,s
-t,z,f,y,e
-u
-k,f,m

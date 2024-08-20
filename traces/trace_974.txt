@@ -1,3 +1,0 @@
-b,c,s
-q,g,h,a,e
-b,c

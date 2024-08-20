@@ -1,5 +1,0 @@
-f,p,z,a,b
-d,s,i
-l,o,j,x,i
-o,r
-q,a,g,o

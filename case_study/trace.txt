@@ -1,0 +1,5 @@
+
+gamma,b1,c 
+gamma,c,mb,b2
+c
+w

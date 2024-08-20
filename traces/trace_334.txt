@@ -1,6 +1,0 @@
-i
-j,f
-u,c
-q,j,d,c
-k,h,r,x,n
-j,s,u,o,k

@@ -1,6 +1,0 @@
-w,t
-p,q
-e,k
-e,r
-e,j
-c,p

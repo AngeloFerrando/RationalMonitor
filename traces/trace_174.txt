@@ -1,3 +1,0 @@
-h,n,f,d,l
-y,i,j,a,k
-o,w,v,z

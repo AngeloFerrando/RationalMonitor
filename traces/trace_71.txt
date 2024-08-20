@@ -1,7 +1,0 @@
-z,w,i,y
-v,w,z,p
-s,n,u
-z
-n,m,k,y
-x
-u,b,m,p

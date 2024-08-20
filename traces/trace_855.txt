@@ -1,6 +1,0 @@
-c,r,k,l
-s
-y
-c,l,b,y
-s,n
-k,m

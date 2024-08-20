@@ -1,4 +1,0 @@
-a,q,u,r,c
-w,u
-y,c
-q

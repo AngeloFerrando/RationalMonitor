@@ -1,0 +1,77 @@
+
+phi1
+
+Standard
+Verdict: Unknown
+Passive
+Verdict: Unknown (but it won't ever be False)
+Active
+Verdict: True
+Reactive
+Verdict: True
+
+phi2
+
+Standard
+Verdict: Unknown
+Passive
+Verdict: Unknown (but it won't ever be False)
+Active
+Verdict: True
+Reactive
+Verdict: True
+
+phi3
+
+Standard
+Verdict: True
+Passive
+Verdict: Unknown (but it won't ever be False)
+Active
+Verdict: Unknown
+Reactive
+Verdict: Unknown
+
+psi1
+
+Standard
+Verdict: Unknown
+Passive
+Verdict: Unknown (but it won't ever be True)
+Active
+Verdict: False
+Reactive
+Verdict: False
+
+psi2
+
+Standard
+Verdict: Unknown
+Passive
+Verdict: Unknown (but it won't ever be True)
+Active
+Verdict: False
+Reactive
+Verdict: False
+
+psi3
+
+Standard
+Verdict: False
+Passive
+Verdict: Unknown (but it won't ever be True)
+Active
+Verdict: Unknown
+Reactive
+Verdict: Unknown
+
+psi1orpsi2
+
+Standard
+Verdict: Unknown
+Passive
+Verdict: Unknown (but it won't ever be True)
+Active
+Verdict: Unknown (but it won't ever be True)
+Reactive
+Verdict: False

@@ -1,6 +1,0 @@
-w,l,s,m
-k,p,n,r
-g,r,i,p,l
-y,w
-q,b,s
-s,k,y,p

@@ -1,5 +1,0 @@
-k,i
-w,v
-m,y,d,v
-x,k,a
-r,v,q,j,n

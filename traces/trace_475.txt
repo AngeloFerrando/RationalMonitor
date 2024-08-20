@@ -1,4 +1,0 @@
-y,m
-b,f
-s,f,k,v
-l,b,e

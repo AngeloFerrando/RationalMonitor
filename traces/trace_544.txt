@@ -1,8 +1,0 @@
-i,f,s,h
-h
-n,p,l,f
-f,a,k,l
-j
-n,i,t
-k
-s,n

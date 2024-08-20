@@ -1,3 +1,0 @@
-t,p,q,x,n
-u
-i,c,z,m,x

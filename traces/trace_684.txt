@@ -1,4 +1,0 @@
-o
-t,y,c,d
-v,a,g,e
-z

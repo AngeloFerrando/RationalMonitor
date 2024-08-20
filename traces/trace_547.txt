@@ -1,4 +1,0 @@
-l,z,t,x
-b,x
-s,g,p
-c,l

@@ -1,11 +1,9 @@
 import sys
-# sys.path.insert(0,'/home/angelo/usr/lib/python3.10/site-packages/')
 import spot
-import time
 from enum import Enum
 import buddy
 import importlib
-# from timeout_decorator import timeout
+import argparse
 
 class Verdict(Enum):
     ff = 0
@@ -39,10 +37,11 @@ class RationalMonitor:
         self.__ltl = self.split(spot.formula(ltl))
         self.__count = 0
     def revise_and_evaluate(self):
+        # print(str(self.__ltl))
         payoffs = get_payoffs(spot.formula(str(self.__ltl)), self.__sim_backup)
-        print(f'Payoffs: {payoffs}')
+        # print(f'Payoffs: {payoffs}')
         sim_to_break = knapsack(payoffs, self.__costs, self.__resource_bound)
-        print(f'broken sim: {sim_to_break}')
+        # print(f'broken sim: {sim_to_break}')
         self.__sim = [s for s in self.__sim_backup if s not in sim_to_break]
     def next(self, ev):
         if self.__count % self.__time_window == 0:
@@ -167,9 +166,9 @@ class NotCompositionalMonitor():
 class TemporalMonitor:
     def __init__(self, ltl, ap):
         eLTL = explicit_ltl(spot.formula(ltl).negative_normal_form().to_str(), ap)
-        print('Explicit LTL: ', eLTL)
+        # print('Explicit LTL: ', eLTL)
         enLTL = explicit_ltl(spot.formula('!(' + ltl + ')').negative_normal_form().to_str(), ap)
-        print('Explicit negation of LTL: ', enLTL)
+        # print('Explicit negation of LTL: ', enLTL)
         self.__pAut = spot.translate(eLTL)
         self.__nAut = spot.translate(enLTL)
         self.__uAut = spot.translate('!('+eLTL+')&'+'!('+enLTL+')')
@@ -203,7 +202,7 @@ class TemporalMonitor:
         initSet.add(init)
         return initSet, fin
     def next(self, ev, sim):
-        print(ev)
+        # print(ev)
         event = buddy.bddtrue
         for ap in self.__ap:
             if ap.startswith('!'): continue
@@ -344,10 +343,27 @@ def knapsack(payoffs, costs, resource_bound):
 
 # @timeout(3)
 def main(args):
+    """
+    Main function to parse arguments and run the Rational Monitor.
+    """
+    parser = argparse.ArgumentParser(description='Rational Monitor for LTL formulas.')
+    parser.add_argument('ltl', type=str, help='LTL formula to monitor')
+    parser.add_argument('ap', type=str, help='Atomic propositions in the formula')
+    parser.add_argument('sim', type=str, help='Simulation traces')
+    parser.add_argument('costs', type=str, help='Costs associated with atomic propositions')
+    parser.add_argument('resource_bound', type=float, help='Resource bound for knapsack problem')
+    parser.add_argument('time_window', type=int, help='Time window for monitoring')
+    parser.add_argument('filename', type=str, help='File with events to monitor')
+    parser.add_argument('metric_module', type=str, help='Metric module to calculate payoffs')
+    
+    args = parser.parse_args(args[1:])
+    
     global metric
-    ltl = args[1]
-    ap = set(args[2].replace('[','').replace(']','').replace(' ', '').split(','))
-    aux = args[3]
+    metric = importlib.import_module(args.metric_module)
+
+    ltl = args.ltl
+    ap = set(args.ap.replace('[','').replace(']','').replace(' ', '').split(','))
+    aux = args.sim
     sim = []
     i = aux.find('[')
     j = aux.find(']')
@@ -356,20 +372,13 @@ def main(args):
         i = aux.find('[', i+1)
         j = aux.find(']', j+1)
     costs = {}
-    for c in args[4].split(';'):
-        costs[c.split(':')[0].replace(' ', '')] = float(c.split(':')[1])
-    resource_bound = float(args[5])
-    time_window = int(args[6])
-    filename = args[7]
-    # importlib.invalidate_caches()
-    metric = importlib.import_module(args[8])
-    print(metric)
-    print('ltl ' + str(ltl))
-    print('ap ' + str(ap))
-    print('sim ' + str(sim))
-    print('costs ' + str(costs))
-    print('resource bound ' + str(resource_bound))
-    print(filename)
+    if args.costs:
+        for c in args.costs.split(';'):
+            costs[c.split(':')[0].replace(' ', '')] = float(c.split(':')[1])
+    resource_bound = args.resource_bound
+    time_window = args.time_window
+    filename = args.filename
+    
     monitor = RationalMonitor(ltl, ap, sim, costs, resource_bound, time_window)
     verdict = None
     with open(filename, 'r') as file:
@@ -383,5 +392,3 @@ def main(args):
 
 if __name__ == '__main__':
     main(sys.argv)
-
-# main(["", "!G!(x && Xi) || F(Xg || (Fj U o))", "[a,b,c,d]", "[a,b];[c,d]", "[a,b]:10;[c,d]:10", "10", "1", "test.txt", "metric_1"])

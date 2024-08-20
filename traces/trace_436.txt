@@ -1,7 +1,0 @@
-s
-q,p,t,y,r
-t
-p,c,v
-x,t
-k,y,m,c
-o

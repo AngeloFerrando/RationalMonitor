@@ -39,7 +39,7 @@ with open('res.txt', 'w') as file:
     file.write('')
 with open('tmp-res.txt', 'w') as tmp_res:
     for i in range(0, 4):
-        results[f'metric_{i}'] = {'True': 0, 'False': 0, 'Unknown': 0, 'Undefined': 0, 'Unknown (but it won\'t ever be False)': 0, 'Unknown (but it won\'t ever be True)': 0}
+        results[f'metric_{i}'] = {'True': 0, 'False': 0, 'Unknown': 0, 'Undefined': 0, 'Unknown(butitwon\'teverbeFalse)': 0, 'Unknown(butitwon\'teverbeTrue)': 0}
         with open('props.txt', 'r') as file:
             lines = file.readlines()
             for line in lines:
@@ -49,7 +49,7 @@ with open('tmp-res.txt', 'w') as tmp_res:
                         file_t.write(trace)
                     try:
                         # Run the code
-                        run_process = subprocess.run(['python3', './rational_monitor.py', line[0], line[1], line[2], line[3], line[4], '100000', 'tmp.txt', f'metric_{i}'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=Timeout)
+                        run_process = subprocess.run(['python3', './rational_monitor.py', line[0], line[1], line[2], line[3], line[4], '100000', 'tmp.txt', f'metrics.metric_{i}'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=Timeout)
                         # print('code: ' + str(run_process.returncode))
                         res = run_process.stdout.decode()
                         # print(res)

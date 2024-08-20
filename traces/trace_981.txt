@@ -1,3 +1,0 @@
-d,k,y,x
-a,j,x,y,q
-v,s,p,b

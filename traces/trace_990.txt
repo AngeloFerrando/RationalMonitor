@@ -1,4 +1,0 @@
-c,h
-z
-e,r
-b,f,s,h,p

@@ -1,6 +1,0 @@
-t,p
-j,f
-j
-w,v
-z
-e,s,x

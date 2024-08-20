@@ -1,7 +1,0 @@
-h,v,k,g
-c,q
-k,x,v,f
-o,r,g
-x,u,a,i
-w,q,x,i
-x

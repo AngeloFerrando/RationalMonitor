@@ -1,7 +1,0 @@
-d,b,f,p
-t,r,p,a
-f,y,x
-z
-j
-f
-t
