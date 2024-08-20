@@ -43,7 +43,7 @@ python script.py <ltl> <ap> <sim> <costs> <resource_bound> <time_window> <filena
 - `resource_bound`: A floating-point number representing the resource bound for the knapsack problem (e.g., `10`).
 - `time_window`: An integer representing the time window for monitoring (e.g., `1`).
 - `filename`: The name of the file containing the events to monitor (e.g., `test.txt`).
-- `metric_module`: The name of the Python module that contains the metric function for calculating payoffs (e.g., `metric_1`).
+- `metric_module`: The name of the Python module that contains the metric function for calculating payoffs (e.g., `metrics.metric_1`).
 
 #### Example:
 
